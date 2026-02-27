@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "aiosharp-cocoro-air"
-version = "0.1.0"
+version = "0.1.1"
 description = "Async Python client for the Sharp COCORO Air EU cloud API"
 readme = "README.md"
 license = "MIT"
@@ -34,6 +34,9 @@ Issues = "https://github.com/rsokolowski/aiosharp-cocoro-air/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+aiosharp_cocoro_air = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
