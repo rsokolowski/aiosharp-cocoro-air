@@ -39,6 +39,8 @@ async with SharpCOCOROAir(email, password, session=hass_session) as client:
 
 Sharp air purifiers sold in Europe that use the Sharp COCORO Air EU cloud (the same backend as the official **Sharp Life AIR EU** mobile app).
 
+> **Note:** This library has only been tested with the **Sharp KI-N52** air purifier. It should work with other Sharp COCORO Air EU devices, but this is unconfirmed. If you have a different model, please open an issue with your results.
+
 ## API
 
 ### `SharpCOCOROAir(email, password, session=None)`
