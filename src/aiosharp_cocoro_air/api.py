@@ -43,6 +43,7 @@ class SharpCOCOROAir:
         self._email = email
         self._password = password
         self._terminal_app_id: str | None = None
+        self._user_id: str | None = None
 
         if session is not None:
             self._session = session
@@ -50,6 +51,11 @@ class SharpCOCOROAir:
         else:
             self._session = None  # created lazily in _ensure_session
             self._owned_session = True
+
+    @property
+    def user_id(self) -> str | None:
+        """Return the user ID obtained during authentication."""
+        return self._user_id
 
     def _ensure_session(self) -> aiohttp.ClientSession:
         """Return the HTTP session, creating one if we own it."""
@@ -123,10 +129,11 @@ class SharpCOCOROAir:
         )
 
         # Step 4: Get user info
-        await self._hms_request(
+        user_info = await self._hms_request(
             "setting/userInfo",
             extra_params={"terminalAppId": self._terminal_app_id},
         )
+        self._user_id = user_info.get("userId")
 
         # Step 5: Register terminal
         await self._register_terminal()

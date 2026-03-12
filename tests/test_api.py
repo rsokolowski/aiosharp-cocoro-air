@@ -132,7 +132,7 @@ class TestAuthenticate:
             # Step 4: userInfo
             m.get(
                 _url("setting/userInfo", terminalAppId="tai-001"),
-                payload={"user": "test"},
+                payload={"userId": "uid-001", "mailAddr": "u@e.com"},
             )
             # Step 5: register terminal
             m.post(terminal_url, payload={"status": "ok"})
@@ -146,6 +146,7 @@ class TestAuthenticate:
                 await client.authenticate()
 
             assert client._terminal_app_id == "tai-001"
+            assert client.user_id == "uid-001"
             mock_auth.assert_awaited_once_with("u@e.com", "pass")
 
 
@@ -368,7 +369,7 @@ class TestPairBoxes:
             )
             m.get(
                 _url("setting/userInfo", terminalAppId="tai-new"),
-                payload={},
+                payload={"userId": "uid-new", "mailAddr": "u@e.com"},
             )
             m.post(terminal_url, payload={})
             # boxInfo for pair_boxes
